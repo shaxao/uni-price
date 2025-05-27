@@ -1,0 +1,1 @@
+<view class="{{['base-card', 'data-v-03acb5fc', c, d, e]}}"><view wx:if="{{a}}" class="base-card__header data-v-03acb5fc"><slot name="header"></slot></view><view class="base-card__body data-v-03acb5fc"><slot></slot></view><view wx:if="{{b}}" class="base-card__footer data-v-03acb5fc"><slot name="footer"></slot></view></view>

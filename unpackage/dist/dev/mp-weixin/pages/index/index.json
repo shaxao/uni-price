@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "首页",
+  "usingComponents": {
+    "search-bar": "../../components/SearchBar",
+    "filter-bar": "../../components/FilterBar",
+    "product-card": "../../components/ProductCard",
+    "tab-bar": "../../components/TabBar",
+    "loading-animation": "../../components/LoadingAnimation"
+  }
+}

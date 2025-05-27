@@ -1,0 +1,266 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.admin-product-detail-container.data-v-5dbbcc34 {
+  min-height: 100vh;
+  background: #F5F7FA;
+  padding: 32rpx 0;
+}
+.content-wrapper.data-v-5dbbcc34 {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.page-header.data-v-5dbbcc34 {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.page-header .page-title.data-v-5dbbcc34 {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 12rpx;
+  display: block;
+}
+.page-header .page-subtitle.data-v-5dbbcc34 {
+  font-size: 26rpx;
+  color: #606266;
+}
+.form-card.data-v-5dbbcc34 {
+  margin-bottom: 24rpx;
+}
+.form-content .form-row.data-v-5dbbcc34 {
+  display: flex;
+  gap: 32rpx;
+  margin-bottom: 32rpx;
+}
+.form-content .form-row .product-image.data-v-5dbbcc34 {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 12rpx;
+  margin-right: 24rpx;
+  background: #f5f5f5;
+  object-fit: cover;
+}
+.form-content .form-row .product-info-main.data-v-5dbbcc34 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.form-content .form-row .product-info-main .product-title.data-v-5dbbcc34 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #303133;
+}
+.form-content .form-row .product-info-main .product-desc.data-v-5dbbcc34 {
+  font-size: 26rpx;
+  color: #606266;
+}
+.form-content .info-section.data-v-5dbbcc34 {
+  margin-bottom: 24rpx;
+}
+.form-content .info-section .section-title.data-v-5dbbcc34 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 12rpx;
+  display: block;
+}
+.form-content .info-section .info-grid.data-v-5dbbcc34 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18rpx;
+}
+.form-content .info-section .info-item.data-v-5dbbcc34 {
+  margin-bottom: 8rpx;
+}
+.form-content .info-section .info-item .label.data-v-5dbbcc34 {
+  font-size: 24rpx;
+  color: #606266;
+  margin-right: 8rpx;
+}
+.form-content .info-section .info-item .value.data-v-5dbbcc34 {
+  font-size: 24rpx;
+  color: #303133;
+}
+/* 报价列表样式 */
+.quotes-card.data-v-5dbbcc34 {
+  margin-bottom: 24rpx;
+}
+.quotes-header.data-v-5dbbcc34 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+.quotes-header .quotes-title.data-v-5dbbcc34 {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #303133;
+}
+.quotes-header .quotes-filter .filter-item.data-v-5dbbcc34 {
+  font-size: 24rpx;
+  color: #1976D2;
+  background: rgba(25, 118, 210, 0.1);
+  border-radius: 6rpx;
+  padding: 8rpx 16rpx;
+}
+.empty-state.data-v-5dbbcc34 {
+  display: flex;
+  justify-content: center;
+  padding: 60rpx 0;
+}
+.empty-state .empty-text.data-v-5dbbcc34 {
+  font-size: 28rpx;
+  color: #909399;
+}
+.quotes-list .quote-item.data-v-5dbbcc34 {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+.quotes-list .quote-item.data-v-5dbbcc34:last-child {
+  border-bottom: none;
+}
+.quotes-list .quote-item.pending.data-v-5dbbcc34 {
+  background-color: rgba(250, 250, 250, 0.6);
+}
+.quotes-list .quote-item.approved.data-v-5dbbcc34 {
+  background-color: rgba(232, 245, 233, 0.4);
+}
+.quotes-list .quote-item.rejected.data-v-5dbbcc34 {
+  background-color: rgba(255, 235, 238, 0.4);
+}
+.quotes-list .quote-content.data-v-5dbbcc34 {
+  flex: 1;
+}
+.quotes-list .quote-content .quote-user-info.data-v-5dbbcc34 {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+.quotes-list .quote-content .quote-user-info .user-name.data-v-5dbbcc34 {
+  font-size: 28rpx;
+  font-weight: 500;
+  color: #303133;
+}
+.quotes-list .quote-content .quote-user-info .quote-date.data-v-5dbbcc34 {
+  font-size: 22rpx;
+  color: #909399;
+  margin-left: 16rpx;
+}
+.quotes-list .quote-content .quote-details .quote-row.data-v-5dbbcc34 {
+  display: flex;
+  margin-bottom: 8rpx;
+}
+.quotes-list .quote-content .quote-details .quote-row .quote-label.data-v-5dbbcc34 {
+  font-size: 24rpx;
+  color: #606266;
+  width: 120rpx;
+}
+.quotes-list .quote-content .quote-details .quote-row .quote-value.data-v-5dbbcc34 {
+  font-size: 24rpx;
+  color: #303133;
+}
+.quotes-list .quote-content .quote-details .quote-row .quote-value.price.data-v-5dbbcc34 {
+  color: #f44336;
+}
+.quotes-list .quote-status.data-v-5dbbcc34 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.quotes-list .quote-status .status-tag.data-v-5dbbcc34 {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 6rpx;
+}
+.quotes-list .quote-status .status-tag.pending.data-v-5dbbcc34 {
+  background-color: #e0e0e0;
+  color: #757575;
+}
+.quotes-list .quote-status .status-tag.approved.data-v-5dbbcc34 {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+.quotes-list .quote-status .status-tag.rejected.data-v-5dbbcc34 {
+  background-color: #ffebee;
+  color: #f44336;
+}
+.quotes-list .quote-status .quote-actions.data-v-5dbbcc34 {
+  display: flex;
+  gap: 8rpx;
+  margin-top: 16rpx;
+}
+.quotes-list .quote-status .quote-actions .mini-btn.data-v-5dbbcc34 {
+  font-size: 22rpx;
+  padding: 4rpx 12rpx;
+  border-radius: 4rpx;
+  line-height: 1.5;
+}
+.quotes-list .quote-status .quote-actions .mini-btn.approve.data-v-5dbbcc34 {
+  background-color: #e8f5e9;
+  color: #4caf50;
+}
+.quotes-list .quote-status .quote-actions .mini-btn.reject.data-v-5dbbcc34 {
+  background-color: #ffebee;
+  color: #f44336;
+}
+.quotes-list .quote-status .quote-actions .mini-btn.view.data-v-5dbbcc34 {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+.action-buttons.data-v-5dbbcc34 {
+  display: flex;
+  gap: 32rpx;
+  margin-top: 24rpx;
+  padding: 24rpx 0;
+}
+.action-buttons .action-btn.data-v-5dbbcc34 {
+  flex: 1;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.action-buttons .action-btn.secondary.data-v-5dbbcc34 {
+  background-color: #fbe9e7;
+  color: #f44336;
+  border: none;
+}
+.action-buttons .action-btn.primary.data-v-5dbbcc34 {
+  background-color: #1976D2;
+  color: #fff;
+  border: none;
+}

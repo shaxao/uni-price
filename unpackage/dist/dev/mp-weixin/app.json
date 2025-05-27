@@ -1,0 +1,28 @@
+{
+  "pages": [
+    "pages/admin/product/list",
+    "pages/admin/product/edit",
+    "pages/admin/product/detail",
+    "pages/admin/quote/list",
+    "pages/admin/quote/detail",
+    "pages/login/index",
+    "pages/index/index",
+    "pages/forgot-password/index",
+    "pages/register/index",
+    "pages/privacy/index",
+    "pages/product/create",
+    "pages/product/detail",
+    "pages/quote/create",
+    "pages/quote/detail",
+    "pages/quote/edit",
+    "pages/quote/my",
+    "pages/cart/index"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "纵远报价管理系统",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F8F8F8"
+  },
+  "usingComponents": {}
+}

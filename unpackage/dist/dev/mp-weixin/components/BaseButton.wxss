@@ -1,0 +1,214 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.base-button.data-v-f82883ed {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  -webkit-appearance: none;
+  text-align: center;
+  box-sizing: border-box;
+  outline: none;
+  transition: all 0.2s;
+  font-weight: 500;
+  -webkit-user-select: none;
+          user-select: none;
+  vertical-align: middle;
+  border: 1px solid transparent;
+}
+.base-button.is-disabled.data-v-f82883ed, .base-button.is-loading.data-v-f82883ed {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.base-button.is-block.data-v-f82883ed {
+  display: flex;
+  width: 100%;
+}
+.base-button .button-content.data-v-f82883ed {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.base-button .loading-icon.data-v-f82883ed {
+  width: 12px;
+  height: 12px;
+  margin-right: 6px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: button-loading-f82883ed 0.8s linear infinite;
+}
+.base-button.large.data-v-f82883ed {
+  height: 88rpx;
+  padding: 0 30rpx;
+  font-size: 32rpx;
+  border-radius: 8rpx;
+}
+.base-button.normal.data-v-f82883ed {
+  height: 72rpx;
+  padding: 0 24rpx;
+  font-size: 28rpx;
+  border-radius: 6rpx;
+}
+.base-button.small.data-v-f82883ed {
+  height: 56rpx;
+  padding: 0 16rpx;
+  font-size: 24rpx;
+  border-radius: 4rpx;
+}
+.base-button.mini.data-v-f82883ed {
+  height: 48rpx;
+  padding: 0 12rpx;
+  font-size: 22rpx;
+  border-radius: 4rpx;
+}
+.base-button.is-round.large.data-v-f82883ed {
+  border-radius: 44rpx;
+}
+.base-button.is-round.normal.data-v-f82883ed {
+  border-radius: 36rpx;
+}
+.base-button.is-round.small.data-v-f82883ed {
+  border-radius: 28rpx;
+}
+.base-button.is-round.mini.data-v-f82883ed {
+  border-radius: 24rpx;
+}
+.base-button.default.data-v-f82883ed {
+  color: #303133;
+  background-color: #fff;
+  border-color: #dcdfe6;
+}
+.base-button.default.data-v-f82883ed:active {
+  border-color: #c6c6c6;
+  background-color: #f2f2f2;
+}
+.base-button.default.is-plain.data-v-f82883ed {
+  color: #303133;
+  background: transparent;
+}
+.base-button.default.is-plain.data-v-f82883ed:active {
+  background-color: #f2f2f2;
+}
+.base-button.default .loading-icon.data-v-f82883ed {
+  border-color: #303133;
+  border-top-color: transparent;
+}
+.base-button.primary.data-v-f82883ed {
+  color: #fff;
+  background-color: #1976D2;
+  border-color: #1976D2;
+}
+.base-button.primary.data-v-f82883ed:active {
+  background-color: #145ca4;
+  border-color: #145ca4;
+}
+.base-button.primary.is-plain.data-v-f82883ed {
+  color: #1976D2;
+  background: #a9cff5;
+  border-color: #64a9ed;
+}
+.base-button.primary.is-plain.data-v-f82883ed:active {
+  background-color: #92c2f2;
+}
+.base-button.success.data-v-f82883ed {
+  color: #fff;
+  background-color: #67c23a;
+  border-color: #67c23a;
+}
+.base-button.success.data-v-f82883ed:active {
+  background-color: #529b2e;
+  border-color: #529b2e;
+}
+.base-button.success.is-plain.data-v-f82883ed {
+  color: #67c23a;
+  background: #d0edc2;
+  border-color: #a3db87;
+}
+.base-button.success.is-plain.data-v-f82883ed:active {
+  background-color: #c1e7ae;
+}
+.base-button.warning.data-v-f82883ed {
+  color: #fff;
+  background-color: #e6a23c;
+  border-color: #e6a23c;
+}
+.base-button.warning.data-v-f82883ed:active {
+  background-color: #d48a1b;
+  border-color: #d48a1b;
+}
+.base-button.warning.is-plain.data-v-f82883ed {
+  color: #e6a23c;
+  background: #faedda;
+  border-color: #f2cd96;
+}
+.base-button.warning.is-plain.data-v-f82883ed:active {
+  background-color: #f7e3c4;
+}
+.base-button.danger.data-v-f82883ed {
+  color: #fff;
+  background-color: #f56c6c;
+  border-color: #f56c6c;
+}
+.base-button.danger.data-v-f82883ed:active {
+  background-color: #f23c3c;
+  border-color: #f23c3c;
+}
+.base-button.danger.is-plain.data-v-f82883ed {
+  color: #f56c6c;
+  background: white;
+  border-color: #fbcccc;
+}
+.base-button.danger.is-plain.data-v-f82883ed:active {
+  background-color: #fffbfb;
+}
+.base-button.info.data-v-f82883ed {
+  color: #fff;
+  background-color: #909399;
+  border-color: #909399;
+}
+.base-button.info.data-v-f82883ed:active {
+  background-color: #767980;
+  border-color: #767980;
+}
+.base-button.info.is-plain.data-v-f82883ed {
+  color: #909399;
+  background: #edeeee;
+  border-color: #c5c7ca;
+}
+.base-button.info.is-plain.data-v-f82883ed:active {
+  background-color: #e0e1e2;
+}
+@keyframes button-loading-f82883ed {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}

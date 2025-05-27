@@ -1,0 +1,420 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.detail-container.data-v-9ac2b0fc {
+  min-height: 100vh;
+  background-color: #F5F7FA;
+  padding: 16rpx;
+}
+.content-wrapper.data-v-9ac2b0fc {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.error-bar.data-v-9ac2b0fc {
+  background-color: #fcf0f0;
+  border: 1px solid #ffccc7;
+  padding: 20rpx 30rpx;
+  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.error-bar .error-message.data-v-9ac2b0fc {
+  font-size: 26rpx;
+  color: #f5222d;
+}
+.error-bar .error-action.data-v-9ac2b0fc {
+  font-size: 26rpx;
+  color: #1976D2;
+  padding: 6rpx 16rpx;
+  background-color: rgba(25, 118, 210, 0.1);
+  border-radius: 20rpx;
+}
+/* 状态时间线 */
+.status-timeline.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+  padding: 30rpx 40rpx;
+  background-color: white;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  position: relative;
+}
+.status-timeline.data-v-9ac2b0fc::before {
+  content: "";
+  position: absolute;
+  top: 50rpx;
+  left: 70rpx;
+  right: 70rpx;
+  height: 2rpx;
+  background-color: #e8e8e8;
+  z-index: 1;
+}
+.status-timeline .timeline-item.data-v-9ac2b0fc {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  flex: 1;
+}
+.status-timeline .timeline-item .timeline-dot.data-v-9ac2b0fc {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 50%;
+  background-color: #e8e8e8;
+  border: 6rpx solid white;
+  margin-bottom: 16rpx;
+}
+.status-timeline .timeline-item .timeline-label.data-v-9ac2b0fc {
+  font-size: 24rpx;
+  color: #999;
+  margin-bottom: 8rpx;
+}
+.status-timeline .timeline-item .timeline-date.data-v-9ac2b0fc {
+  font-size: 22rpx;
+  color: #bbb;
+}
+.status-timeline .timeline-item.active .timeline-dot.data-v-9ac2b0fc {
+  background-color: #1976D2;
+}
+.status-timeline .timeline-item.active .timeline-label.data-v-9ac2b0fc {
+  color: #303133;
+  font-weight: 500;
+}
+.status-timeline .timeline-item.active .timeline-date.data-v-9ac2b0fc {
+  color: #606266;
+}
+.status-timeline .timeline-item.current .timeline-dot.data-v-9ac2b0fc {
+  width: 24rpx;
+  height: 24rpx;
+  background-color: #1976D2;
+  box-shadow: 0 0 0 6rpx rgba(25, 118, 210, 0.2);
+}
+.quote-card .card-header.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 1px solid #f5f5f5;
+}
+.quote-card .card-header .quote-title.data-v-9ac2b0fc {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #303133;
+}
+.quote-card .card-header .quote-status.data-v-9ac2b0fc {
+  display: flex;
+  align-items: center;
+  padding: 8rpx 16rpx;
+  border-radius: 20rpx;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+.quote-card .card-header .quote-status .status-icon.data-v-9ac2b0fc {
+  margin-right: 8rpx;
+  font-size: 28rpx;
+}
+.quote-card .card-header .quote-status.pending.data-v-9ac2b0fc {
+  background: rgba(158, 158, 158, 0.1);
+  color: #757575;
+}
+.quote-card .card-header .quote-status.approved.data-v-9ac2b0fc {
+  background: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+}
+.quote-card .card-header .quote-status.rejected.data-v-9ac2b0fc {
+  background: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+}
+.quote-card .card-header .quote-status.expired.data-v-9ac2b0fc {
+  background: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+}
+.quote-card .card-header .quote-status.cancelled.data-v-9ac2b0fc {
+  background: rgba(111, 66, 193, 0.1);
+  color: #673ab7;
+}
+/* 产品信息区 */
+.product-section.data-v-9ac2b0fc {
+  background-color: #f9f9f9;
+  padding: 24rpx;
+  border-radius: 16rpx;
+  margin-bottom: 24rpx;
+}
+.product-section .product-name.data-v-9ac2b0fc {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 16rpx;
+}
+.product-section .product-meta.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+}
+.product-section .product-meta .meta-item.data-v-9ac2b0fc {
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #606266;
+}
+.product-section .product-meta .meta-item .meta-icon.data-v-9ac2b0fc {
+  margin-right: 8rpx;
+}
+/* 价格信息区 */
+.price-section.data-v-9ac2b0fc {
+  margin-bottom: 30rpx;
+}
+.price-section .total-price.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 16rpx;
+  margin-bottom: 20rpx;
+  border-bottom: 1px dashed #eee;
+}
+.price-section .total-price .price-label.data-v-9ac2b0fc {
+  font-size: 28rpx;
+  color: #606266;
+}
+.price-section .total-price .price-value.data-v-9ac2b0fc {
+  font-size: 40rpx;
+  font-weight: bold;
+  color: #ff5252;
+}
+.price-section .price-details.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.price-section .price-details .price-item.data-v-9ac2b0fc {
+  width: 30%;
+  margin-bottom: 16rpx;
+}
+.price-section .price-details .price-item .item-label.data-v-9ac2b0fc {
+  font-size: 24rpx;
+  color: #909399;
+  margin-bottom: 8rpx;
+  display: block;
+}
+.price-section .price-details .price-item .item-value.data-v-9ac2b0fc {
+  font-size: 28rpx;
+  color: #303133;
+  font-weight: 500;
+}
+/* 备注信息区 */
+.remark-section.data-v-9ac2b0fc {
+  margin-bottom: 30rpx;
+}
+.remark-section .section-title.data-v-9ac2b0fc {
+  font-size: 28rpx;
+  color: #303133;
+  font-weight: 500;
+  margin-bottom: 16rpx;
+  display: block;
+}
+.remark-section .remark-content.data-v-9ac2b0fc {
+  background-color: #f9f9f9;
+  padding: 20rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #606266;
+  line-height: 1.6;
+}
+/* 状态卡片 */
+.status-card.data-v-9ac2b0fc {
+  display: flex;
+  align-items: center;
+  padding: 30rpx;
+  border-radius: 16rpx;
+  margin-bottom: 30rpx;
+}
+.status-card.pending.data-v-9ac2b0fc {
+  background-color: rgba(158, 158, 158, 0.1);
+}
+.status-card.pending .status-icon.data-v-9ac2b0fc {
+  background-color: #757575;
+}
+.status-card.pending .status-title.data-v-9ac2b0fc {
+  color: #757575;
+}
+.status-card.approved.data-v-9ac2b0fc {
+  background-color: rgba(76, 175, 80, 0.1);
+}
+.status-card.approved .status-icon.data-v-9ac2b0fc {
+  background-color: #4caf50;
+}
+.status-card.approved .status-title.data-v-9ac2b0fc {
+  color: #4caf50;
+}
+.status-card.rejected.data-v-9ac2b0fc {
+  background-color: rgba(244, 67, 54, 0.1);
+}
+.status-card.rejected .status-icon.data-v-9ac2b0fc {
+  background-color: #f44336;
+}
+.status-card.rejected .status-title.data-v-9ac2b0fc {
+  color: #f44336;
+}
+.status-card.expired.data-v-9ac2b0fc {
+  background-color: rgba(255, 152, 0, 0.1);
+}
+.status-card.expired .status-icon.data-v-9ac2b0fc {
+  background-color: #ff9800;
+}
+.status-card.expired .status-title.data-v-9ac2b0fc {
+  color: #ff9800;
+}
+.status-card.cancelled.data-v-9ac2b0fc {
+  background-color: rgba(111, 66, 193, 0.1);
+}
+.status-card.cancelled .status-icon.data-v-9ac2b0fc {
+  background-color: #673ab7;
+}
+.status-card.cancelled .status-title.data-v-9ac2b0fc {
+  color: #673ab7;
+}
+.status-card .status-icon.large.data-v-9ac2b0fc {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  margin-right: 24rpx;
+  flex-shrink: 0;
+}
+.status-card .status-content.data-v-9ac2b0fc {
+  flex: 1;
+}
+.status-card .status-content .status-title.data-v-9ac2b0fc {
+  font-size: 30rpx;
+  font-weight: bold;
+  margin-bottom: 8rpx;
+}
+.status-card .status-content .status-desc.data-v-9ac2b0fc {
+  font-size: 26rpx;
+  color: #606266;
+  line-height: 1.5;
+}
+/* 附加信息 */
+.extra-info.data-v-9ac2b0fc {
+  background-color: #f5f5f5;
+  padding: 20rpx;
+  border-radius: 12rpx;
+}
+.extra-info .info-item.data-v-9ac2b0fc {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24rpx;
+  margin-bottom: 8rpx;
+}
+.extra-info .info-item.data-v-9ac2b0fc:last-child {
+  margin-bottom: 0;
+}
+.extra-info .info-item .info-label.data-v-9ac2b0fc {
+  color: #909399;
+}
+.extra-info .info-item .info-value.data-v-9ac2b0fc {
+  color: #606266;
+}
+/* 底部按钮组 */
+.action-buttons.data-v-9ac2b0fc {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 20rpx;
+  padding: 30rpx;
+  background-color: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+  /* 根据状态调整按钮颜色 */
+}
+.action-buttons .action-btn.data-v-9ac2b0fc {
+  flex: 1;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 45rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.action-buttons .action-btn .btn-icon.data-v-9ac2b0fc {
+  margin-right: 12rpx;
+  font-size: 32rpx;
+}
+.action-buttons .action-btn.secondary.data-v-9ac2b0fc {
+  background-color: rgba(25, 118, 210, 0.1);
+  color: #1976D2;
+  border: 2rpx solid rgba(25, 118, 210, 0.3);
+}
+.action-buttons .action-btn.primary.data-v-9ac2b0fc {
+  background-color: #1976D2;
+  color: white;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(25, 118, 210, 0.2);
+}
+.action-buttons.approved .action-btn.primary.data-v-9ac2b0fc {
+  background-color: #4caf50;
+  box-shadow: 0 4rpx 16rpx rgba(76, 175, 80, 0.2);
+}
+.action-buttons.approved .action-btn.secondary.data-v-9ac2b0fc {
+  background-color: rgba(76, 175, 80, 0.1);
+  color: #4caf50;
+  border-color: rgba(76, 175, 80, 0.3);
+}
+.action-buttons.rejected .action-btn.primary.data-v-9ac2b0fc {
+  background-color: #f44336;
+  box-shadow: 0 4rpx 16rpx rgba(244, 67, 54, 0.2);
+}
+.action-buttons.rejected .action-btn.secondary.data-v-9ac2b0fc {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  border-color: rgba(244, 67, 54, 0.3);
+}
+.action-buttons.expired .action-btn.primary.data-v-9ac2b0fc {
+  background-color: #ff9800;
+  box-shadow: 0 4rpx 16rpx rgba(255, 152, 0, 0.2);
+}
+.action-buttons.expired .action-btn.secondary.data-v-9ac2b0fc {
+  background-color: rgba(255, 152, 0, 0.1);
+  color: #ff9800;
+  border-color: rgba(255, 152, 0, 0.3);
+}
+.action-buttons.cancelled .action-btn.primary.data-v-9ac2b0fc {
+  background-color: #673ab7;
+  box-shadow: 0 4rpx 16rpx rgba(103, 58, 183, 0.2);
+}
+.action-buttons.cancelled .action-btn.secondary.data-v-9ac2b0fc {
+  background-color: rgba(103, 58, 183, 0.1);
+  color: #673ab7;
+  border-color: rgba(103, 58, 183, 0.3);
+}

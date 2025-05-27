@@ -1,0 +1,196 @@
+/**
+ * 这里是uni-app内置的常用样式变量
+ *
+ * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量
+ * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App
+ *
+ */
+/**
+ * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能
+ *
+ * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件
+ */
+/* 颜色变量 */
+/* 行为相关颜色 */
+/* 文字基本颜色 */
+/* 背景颜色 */
+/* 边框颜色 */
+/* 尺寸变量 */
+/* 文字尺寸 */
+/* 图片尺寸 */
+/* Border Radius */
+/* 水平间距 */
+/* 垂直间距 */
+/* 透明度 */
+/* 文章场景相关 */
+.edit-container.data-v-acf502d9 {
+  min-height: 100vh;
+  background-color: #F5F7FA;
+  padding: 16rpx;
+}
+.content-wrapper.data-v-acf502d9 {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+}
+.page-header.data-v-acf502d9 {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.page-header .page-title.data-v-acf502d9 {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 12rpx;
+  display: block;
+}
+.page-header .page-subtitle.data-v-acf502d9 {
+  font-size: 26rpx;
+  color: #606266;
+}
+.form-card.data-v-acf502d9 {
+  margin-bottom: 24rpx;
+}
+.form-content .form-row.data-v-acf502d9 {
+  display: flex;
+  gap: 16rpx;
+  margin-bottom: 16rpx;
+}
+.form-content .form-row .product-image.data-v-acf502d9 {
+  width: 160rpx;
+  height: 160rpx;
+  border-radius: 16rpx;
+  margin-right: 16rpx;
+  background: #f5f5f5;
+  object-fit: cover;
+}
+.form-content .form-row .product-info-main.data-v-acf502d9 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+.form-content .form-row .product-info-main .product-title.data-v-acf502d9 {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #303133;
+}
+.form-content .form-row .product-info-main .product-desc.data-v-acf502d9 {
+  font-size: 26rpx;
+  color: #606266;
+}
+.form-content .form-row .product-info-main .product-expiry.data-v-acf502d9 {
+  font-size: 24rpx;
+  color: #606266;
+}
+.form-content .info-section.data-v-acf502d9 {
+  margin-bottom: 24rpx;
+}
+.form-content .info-section .section-title.data-v-acf502d9 {
+  font-size: 28rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 8rpx;
+  display: block;
+}
+.form-content .info-section .info-grid.data-v-acf502d9 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16rpx;
+}
+.form-content .info-section .info-item.data-v-acf502d9 {
+  margin-bottom: 8rpx;
+}
+.form-content .info-section .info-item .label.data-v-acf502d9 {
+  font-size: 24rpx;
+  color: #606266;
+  margin-right: 4rpx;
+}
+.form-content .info-section .info-item .value.data-v-acf502d9 {
+  font-size: 24rpx;
+  color: #303133;
+}
+/* 费用摘要卡片 */
+.summary-card.data-v-acf502d9 {
+  background-color: #fff;
+  padding: 30rpx;
+  border-radius: 12rpx;
+  margin-bottom: 24rpx;
+  box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+.summary-card .summary-title.data-v-acf502d9 {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #303133;
+  margin-bottom: 24rpx;
+}
+.summary-card .summary-item.data-v-acf502d9 {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+.summary-card .summary-item .item-label.data-v-acf502d9 {
+  font-size: 26rpx;
+  color: #606266;
+}
+.summary-card .summary-item .item-value.data-v-acf502d9 {
+  font-size: 26rpx;
+  color: #303133;
+}
+.summary-card .summary-item.total .item-label.data-v-acf502d9 {
+  font-size: 30rpx;
+  font-weight: 500;
+}
+.summary-card .summary-item.total .item-value.data-v-acf502d9 {
+  font-size: 36rpx;
+  font-weight: bold;
+  color: #ff5252;
+}
+.summary-card .summary-divider.data-v-acf502d9 {
+  height: 1rpx;
+  background-color: #eee;
+  margin: 20rpx 0;
+}
+/* 底部按钮组 */
+.action-buttons.data-v-acf502d9 {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 20rpx;
+  padding: 30rpx;
+  background-color: white;
+  border-radius: 16rpx;
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.05);
+}
+.action-buttons .action-btn.data-v-acf502d9 {
+  flex: 1;
+  height: 90rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 45rpx;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+.action-buttons .action-btn .btn-icon.data-v-acf502d9 {
+  margin-right: 12rpx;
+  font-size: 32rpx;
+}
+.action-buttons .action-btn.secondary.data-v-acf502d9 {
+  background-color: rgba(244, 67, 54, 0.1);
+  color: #f44336;
+  border: 2rpx solid rgba(244, 67, 54, 0.3);
+}
+.action-buttons .action-btn.primary.data-v-acf502d9 {
+  background-color: #1976D2;
+  color: white;
+  border: none;
+  box-shadow: 0 4rpx 16rpx rgba(25, 118, 210, 0.2);
+}
+.action-buttons .action-btn.primary.data-v-acf502d9:disabled {
+  opacity: 0.7;
+  background-color: #999;
+  box-shadow: none;
+}

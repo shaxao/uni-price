@@ -1,0 +1,76 @@
+// 主题颜色
+$primary-color: #1976D2;
+$secondary-color: #7986CB;
+$success-color: #4CAF50;
+$warning-color: #FFA000;
+$error-color: #F44336;
+$info-color: #607D8B;
+
+// 文本颜色
+$text-primary: #303133;
+$text-secondary: #606266;
+$text-light: #909399;
+$text-placeholder: #C0C4CC;
+
+// 背景颜色
+$bg-primary: #FFFFFF;
+$bg-secondary: #F5F7FA;
+
+// 边框颜色
+$border-color: #EBEEF5;
+$border-color-light: #F2F6FC;
+
+// 间距
+$spacing-xs: 4rpx;
+$spacing-sm: 8rpx;
+$spacing-md: 16rpx;
+$spacing-lg: 24rpx;
+$spacing-xl: 32rpx;
+
+// 字体大小
+$font-size-xs: 20rpx;
+$font-size-sm: 24rpx;
+$font-size-md: 28rpx;
+$font-size-lg: 32rpx;
+$font-size-xl: 36rpx;
+
+// 边框半径
+$border-radius-sm: 4rpx;
+$border-radius-md: 8rpx;
+$border-radius-lg: 12rpx;
+$border-radius-circle: 50%;
+
+// 阴影
+$box-shadow-base: 0 2rpx 12rpx rgba(0, 0, 0, 0.08);
+$box-shadow-card: 0 4rpx 16rpx rgba(0, 0, 0, 0.06);
+$box-shadow-dropdown: 0 6rpx 16rpx rgba(0, 0, 0, 0.12);
+
+// 动画
+$transition-duration: 0.3s;
+
+// 常用混合
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin multi-ellipsis($lines: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+}

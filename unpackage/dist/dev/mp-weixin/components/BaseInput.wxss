@@ -1,0 +1,63 @@
+
+.base-input-wrapper.data-v-48a2094e {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 32rpx;
+}
+.base-input-label.data-v-48a2094e {
+  font-size: 30rpx;
+  color: #333;
+  margin-bottom: 12rpx;
+  font-weight: 500;
+}
+.base-input.data-v-48a2094e {
+  width: 100%;
+  font-size: 30rpx;
+  padding: 22rpx 24rpx;
+  border: 1px solid #d0d0d0;
+  border-radius: 14rpx;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
+  outline: none;
+  min-height: 100rpx;
+  line-height: 1.6;
+}
+.base-input.data-v-48a2094e:focus {
+  border-color: #1976d2;
+}
+.base-input.data-v-48a2094e::-webkit-input-placeholder {
+  color: #bbb;
+  opacity: 1;
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+.base-input.data-v-48a2094e::placeholder {
+  color: #bbb;
+  opacity: 1;
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+.base-input.textarea.data-v-48a2094e {
+  min-height: 100rpx;
+  resize: none;
+  line-height: 1.6;
+  padding: 22rpx 24rpx;
+}
+.base-input.textarea.data-v-48a2094e::-webkit-input-placeholder {
+  color: #bbb;
+  opacity: 1;
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+.base-input.textarea.data-v-48a2094e::placeholder {
+  color: #bbb;
+  opacity: 1;
+  font-size: 25rpx;
+  line-height: 1.4;
+}
+.base-input-error.data-v-48a2094e {
+  color: #f44336;
+  font-size: 26rpx;
+  margin-top: 8rpx;
+}

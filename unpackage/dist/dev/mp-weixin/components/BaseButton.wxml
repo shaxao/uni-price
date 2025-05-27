@@ -1,0 +1,1 @@
+<button class="{{['base-button', 'data-v-f82883ed', b, c, d]}}" disabled="{{e}}" bindtap="{{f}}"><view class="button-content data-v-f82883ed"><view wx:if="{{a}}" class="loading-icon data-v-f82883ed"></view><slot></slot></view></button>

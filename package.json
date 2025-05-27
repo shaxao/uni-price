@@ -1,0 +1,25 @@
+{
+  "name": "product-price",
+  "version": "1.0.0",
+  "description": "纵远公司询价小程序",
+  "scripts": {
+    "dev": "vue-cli-service uni-build --watch",
+    "build": "vue-cli-service uni-build",
+    "build:mp-weixin": "vue-cli-service uni-build --platform mp-weixin"
+  },
+  "dependencies": {
+    "@vue/cli-service": "^5.0.8",
+    "dayjs": "^1.11.7",
+    "lodash": "^4.17.21",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@dcloudio/uni-app": "^2.0.1-34920220630001",
+    "@dcloudio/uni-app-plus": "^2.0.1-34920220630001",
+    "@dcloudio/uni-cli-shared": "^2.0.1-34920220630001",
+    "@dcloudio/uni-mp-weixin": "^2.0.1-34920220630001",
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.1-34920220630001",
+    "sass": "^1.32.13",
+    "sass-loader": "^10.1.1"
+  }
+}
