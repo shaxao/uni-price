@@ -218,12 +218,19 @@ export default {
           title: '已取消',
           desc: '用户已取消了该报价，不需要进一步操作。'
         }
-      }
+      },
+      shouldFail: false // 用于开发时模拟请求失败的开关
     }
   },
   onLoad(options) {
     this.quoteId = options.quoteId || ''
     this.productId = options.productId || ''
+    
+    // 开发环境下随机决定是否模拟失败 (10%的概率失败)
+    if (process.env.NODE_ENV === 'development') {
+      this.shouldFail = Math.random() < 0.1
+    }
+    
     this.fetchQuoteDetail()
   },
   methods: {
@@ -232,8 +239,14 @@ export default {
       this.hasError = false
       
       try {
-        // 模拟API请求
+        // 模拟API请求，减少加载时间以便调试
         setTimeout(() => {
+          // 如果shouldFail为true，则模拟请求失败
+          if (this.shouldFail) {
+            this.handleError(new Error('模拟请求失败，这是一个随机测试错误'))
+            return
+          }
+          
           // 模拟数据
           const mockData = {
             quote_id: this.quoteId || 'Q10001',
@@ -258,13 +271,17 @@ export default {
           
           this.quote = mockData
           this.isLoading = false
-        }, 800)
+        }, 300) // 将模拟延迟从800ms降低到300ms，提高响应速度
       } catch (error) {
-        console.error('获取报价详情失败:', error)
-        this.hasError = true
-        this.errorMessage = '获取报价详情失败，请重试'
-        this.isLoading = false
+        this.handleError(error)
       }
+    },
+    
+    handleError(error) {
+      console.error('获取报价详情失败:', error)
+      this.hasError = true
+      this.errorMessage = error.message || '获取报价详情失败，请重试'
+      this.isLoading = false
     },
     
     formatDate(date) {

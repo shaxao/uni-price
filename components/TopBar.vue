@@ -1,12 +1,19 @@
 <template>
-  <view class="top-bar">
-    <view class="left" @click="handleBack" v-if="showBack">
-      <text class="back-icon">←</text>
+  <view class="top-bar" :class="{ 'with-border': withBorder }">
+    <view class="left-area">
+      <view class="back-btn" v-if="showBack" @click="goBack">
+        <view class="icon-back"></view>
+      </view>
+      <slot name="left"></slot>
     </view>
-    <view class="center">
-      <text class="title">{{ title }}</text>
+    
+    <view class="title-area">
+      <slot name="title">
+        <text class="page-title">{{ title }}</text>
+      </slot>
     </view>
-    <view class="right">
+    
+    <view class="right-area">
       <slot name="right"></slot>
     </view>
   </view>
@@ -22,19 +29,17 @@ export default {
     },
     showBack: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    withBorder: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-    handleBack() {
-      this.$emit('back');
+    goBack() {
       uni.navigateBack({
-        delta: 1,
-        fail: () => {
-          uni.switchTab({
-            url: '/pages/index/index'
-          });
-        }
+        delta: 1
       });
     }
   }
@@ -42,56 +47,64 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../styles/theme.scss';
-
 .top-bar {
   display: flex;
   align-items: center;
-  height: 90rpx;
-  width: 100%;
-  background-color: #fff;
-  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.05);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  justify-content: space-between;
+  height: 92rpx;
+  padding: 0 24rpx;
+  background-color: #ffffff;
+  position: relative;
   z-index: 100;
-  padding-top: env(safe-area-inset-top); /* 兼容iPhone X及以上机型顶部安全区 */
-}
-
-.left {
-  width: 100rpx;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.back-icon {
-  font-size: 40rpx;
-  color: $text-primary;
-}
-
-.center {
-  flex: 1;
-  text-align: center;
-  padding: 0 20rpx;
-}
-
-.title {
-  font-size: 32rpx;
-  font-weight: 500;
-  color: $text-primary;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.right {
-  width: 100rpx;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
+  &.with-border {
+    border-bottom: 1rpx solid #eaeaea;
+  }
+  
+  .left-area, .right-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  
+  .left-area {
+    justify-content: flex-start;
+  }
+  
+  .right-area {
+    justify-content: flex-end;
+  }
+  
+  .title-area {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .page-title {
+    font-size: 32rpx;
+    font-weight: 500;
+    color: #333333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .back-btn {
+    width: 60rpx;
+    height: 60rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    .icon-back {
+      width: 36rpx;
+      height: 36rpx;
+      border-top: 4rpx solid #333;
+      border-left: 4rpx solid #333;
+      transform: rotate(-45deg);
+    }
+  }
 }
 </style> 

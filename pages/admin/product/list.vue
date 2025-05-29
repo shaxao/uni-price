@@ -1,5 +1,8 @@
 <template>
   <view class="admin-product-list-container">
+    <TopBar title="产品管理" :showBack="false" :withBorder="true" />
+    <AdminNavBar currentPath="/pages/admin/product/list" />
+    
     <view class="header-bar">
       <input class="search-input" v-model="search" placeholder="搜索产品名称/编号" @input="handleSearch" />
       <button class="add-btn" @click="handleAdd">+ 新增产品</button>
@@ -16,7 +19,7 @@
       </picker>
     </view>
     <view class="product-list">
-      <view v-for="item in products" :key="item.product_id" class="product-card">
+      <view v-for="item in filteredProducts" :key="item.product_id" class="product-card">
         <view class="card-left">
           <image
             :src="defaultImg || item.product_image"
@@ -37,7 +40,8 @@
             <text class="product-desc">{{ item.description }}</text>
             <text class="product-stock">库存：{{ item.quantity }}</text>
             <text class="product-warehouse">仓库：{{ item.warehouse }}</text>
-            </view>
+            <text class="product-price" v-if="item.price">价格：¥{{ item.price.toFixed(2) }}</text>
+          </view>
           <view class="card-actions">
             <button class="mini-btn" @click="onView(item)">查看</button>
             <button class="mini-btn" @click="onEdit(item)">编辑</button>
@@ -66,17 +70,29 @@
       <text class="page-info">第{{ page }}页</text>
       <button class="page-btn" :disabled="!hasNextPage" @click="page++">下一页</button>
     </view>
+    
+    <LoadingAnimation v-if="loading" />
+    
+    <!-- 空状态 -->
+    <view class="empty-state" v-if="filteredProducts.length === 0">
+      <image src="/static/images/empty-product.png" class="empty-image" mode="aspectFit" />
+      <text class="empty-text">{{ search ? '未找到匹配的产品' : '暂无产品数据' }}</text>
+    </view>
   </view>
 </template>
 
 <script>
 import BaseCard from '../../../components/BaseCard.vue'
+import TopBar from '../../../components/TopBar.vue'
+import AdminNavBar from '../../../components/AdminNavBar.vue'
+import LoadingAnimation from '../../../components/LoadingAnimation.vue'
 
 export default {
   name: 'AdminProductList',
-  components: { BaseCard },
+  components: { BaseCard, TopBar, AdminNavBar, LoadingAnimation },
   data() {
     return {
+      loading: false,
       search: '',
       page: 1,
       pageSize: 10,
@@ -128,76 +144,85 @@ export default {
       return list.length > this.page * this.pageSize
     }
   },
-  created() {
+  onLoad() {
     this.loadProducts()
   },
   methods: {
     loadProducts() {
+      this.loading = true
       // 生成模拟产品数据
-      const mockProducts = [
-        {
-          product_id: 'P1001',
-          product_name: '智能手表',
-          description: '多功能健康监测智能手表',
-          product_image: 'https://cdn.example.com/img/watch.jpg',
-          quantity: 120,
-          warehouse: '上海仓',
-          status: 'on',
-          pendingQuotes: 3, // 待审核报价数量
-          totalQuotes: 5,   // 总报价数量
-          hasNewQuotes: true // 是否有新报价
-        },
-        {
-          product_id: 'P1002',
-          product_name: '蓝牙耳机',
-          description: '降噪无线蓝牙耳机',
-          product_image: 'https://cdn.example.com/img/earphone.jpg',
-          quantity: 80,
-          warehouse: '深圳仓',
-          status: 'off',
-          pendingQuotes: 0,
-          totalQuotes: 2,
-          hasNewQuotes: false
-        },
-        {
-          product_id: 'P1003',
-          product_name: '智能音箱',
-          description: '高音质智能语音音箱',
-          product_image: 'https://cdn.example.com/img/speaker.jpg',
-          quantity: 50,
-          warehouse: '上海仓',
-          status: 'on',
-          pendingQuotes: 2,
-          totalQuotes: 3,
-          hasNewQuotes: true
-        },
-        {
-          product_id: 'P1004',
-          product_name: '无线充电器',
-          description: '快充无线充电板',
-          product_image: 'https://cdn.example.com/img/charger.jpg',
-          quantity: 200,
-          warehouse: '深圳仓',
-          status: 'on',
-          pendingQuotes: 1,
-          totalQuotes: 1,
-          hasNewQuotes: true
-        },
-        {
-          product_id: 'P1005',
-          product_name: '智能手环',
-          description: '运动监测智能手环',
-          product_image: 'https://cdn.example.com/img/band.jpg',
-          quantity: 150,
-          warehouse: '上海仓',
-          status: 'on',
-          pendingQuotes: 0,
-          totalQuotes: 0,
-          hasNewQuotes: false
-        }
-      ];
-      
-      this.products = mockProducts;
+      setTimeout(() => {
+        const mockProducts = [
+          {
+            product_id: 'P1001',
+            product_name: '智能手表',
+            description: '多功能健康监测智能手表',
+            product_image: 'https://cdn.example.com/img/watch.jpg',
+            quantity: 120,
+            warehouse: '上海仓',
+            status: 'on',
+            price: 1280.00,
+            pendingQuotes: 3, // 待审核报价数量
+            totalQuotes: 5,   // 总报价数量
+            hasNewQuotes: true // 是否有新报价
+          },
+          {
+            product_id: 'P1002',
+            product_name: '蓝牙耳机',
+            description: '降噪无线蓝牙耳机',
+            product_image: 'https://cdn.example.com/img/earphone.jpg',
+            quantity: 80,
+            warehouse: '深圳仓',
+            status: 'off',
+            price: 299.00,
+            pendingQuotes: 0,
+            totalQuotes: 2,
+            hasNewQuotes: false
+          },
+          {
+            product_id: 'P1003',
+            product_name: '智能音箱',
+            description: '高音质智能语音音箱',
+            product_image: 'https://cdn.example.com/img/speaker.jpg',
+            quantity: 50,
+            warehouse: '上海仓',
+            status: 'on',
+            price: 799.00,
+            pendingQuotes: 2,
+            totalQuotes: 3,
+            hasNewQuotes: true
+          },
+          {
+            product_id: 'P1004',
+            product_name: '无线充电器',
+            description: '快充无线充电板',
+            product_image: 'https://cdn.example.com/img/charger.jpg',
+            quantity: 200,
+            warehouse: '深圳仓',
+            status: 'on',
+            price: 159.00,
+            pendingQuotes: 1,
+            totalQuotes: 1,
+            hasNewQuotes: true
+          },
+          {
+            product_id: 'P1005',
+            product_name: '智能手环',
+            description: '运动监测智能手环',
+            product_image: 'https://cdn.example.com/img/band.jpg',
+            quantity: 150,
+            warehouse: '上海仓',
+            status: 'on',
+            price: 199.00,
+            pendingQuotes: 0,
+            totalQuotes: 0,
+            hasNewQuotes: false
+          }
+        ];
+        
+        this.products = mockProducts;
+        this.loading = false;
+      }, 800);
     },
     handleSearch() {
       this.page = 1
@@ -243,10 +268,6 @@ export default {
       // 跳转到产品详情页，自动滚动到报价列表
       uni.navigateTo({ 
         url: `/pages/admin/product/detail?id=${item.product_id}&scrollToQuotes=true`,
-        success: () => {
-          // 标记报价已查看
-          item.hasNewQuotes = false;
-        }
       })
     }
   }
@@ -254,207 +275,210 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../../styles/theme.scss';
 .admin-product-list-container {
-  min-height: 100vh;
-  background: $bg-secondary;
-  padding: 24rpx 0;
-}
-.header-bar {
-  display: flex;
-  gap: 12rpx;
-  margin-bottom: 20rpx;
-  align-items: center;
-  padding: 0 16rpx;
-  .search-input {
-    flex: 1;
-    height: 56rpx;
-    border: 1px solid #e0e0e0;
-    border-radius: 8rpx;
-    font-size: 26rpx;
-    padding: 0 16rpx;
-    background: #fff;
-  }
-  .add-btn {
-    height: 56rpx;
-    padding: 0 15rpx;
-    border-radius: 8rpx;
-    font-size: 26rpx;
+  padding-bottom: 30rpx;
+  
+  .header-bar {
+    padding: 20rpx;
     display: flex;
     align-items: center;
-    justify-content: center;
-    line-height: normal;
-    background: #1976d2;
-    color: #fff;
-    border: none;
-  }
-}
-.product-list {
-  padding: 0 8rpx;
-}
-.product-card {
-  display: flex;
-  background: #fff;
-  border-radius: 14rpx;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.04);
-  margin-bottom: 18rpx;
-  padding: 16rpx 12rpx;
-  align-items: flex-start;
-  position: relative;
-}
-.card-left {
-  flex-shrink: 0;
-    display: flex;
-    align-items: center;
-  justify-content: center;
-}
-.product-img {
-  width: 80rpx;
-  height: 80rpx;
-  border-radius: 10rpx;
-  background: #f5f5f5;
-      object-fit: cover;
-    }
-.card-right {
-      flex: 1;
-  margin-left: 16rpx;
-      display: flex;
-      flex-direction: column;
-  justify-content: center;
-}
-.card-header {
-        display: flex;
-        align-items: center;
-  justify-content: space-between;
-  margin-bottom: 6rpx;
-}
-        .product-title {
-  font-size: 30rpx;
-          font-weight: bold;
-          color: #222;
-        }
-.status-tag {
-  font-size: 22rpx;
-  padding: 2rpx 12rpx;
-  border-radius: 12rpx;
-  margin-left: 8rpx;
-  &.on {
-          background: #e3f2fd;
-          color: #1976d2;
-  }
-          &.off {
-    background: #ffebee;
-            color: #f44336;
-          }
-        }
-.product-info {
-  font-size: 24rpx;
-        color: #666;
-  margin-bottom: 8rpx;
-  .product-id, .product-desc, .product-stock, .product-warehouse {
-    display: block;
-    margin-bottom: 2rpx;
-    }
-  }
-  .card-actions {
-    display: flex;
-  gap: 12rpx;
-  margin-top: 8rpx;
-  position: relative;
-  .mini-btn {
-    font-size: 22rpx;
-    min-width: 72rpx;
-    height: 44rpx;
-    line-height: 44rpx;
-    border-radius: 22rpx;
-      background: #f5f5f5;
-      color: #1976d2;
-      border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 18rpx;
-    box-sizing: border-box;
-      &.danger {
-        background: #fbe9e7;
-        color: #f44336;
-    }
-  }
     
-  /* 报价数量角标 */
-  .quote-badge {
-    position: absolute;
-    right: 0;
-    top: -30rpx;
-    min-width: 40rpx;
-    height: 40rpx;
-    border-radius: 20rpx;
-    background-color: #f44336;
-    color: white;
-    font-size: 22rpx;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10rpx;
-    box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.15);
-    animation: pulse 2s infinite;
+    .search-input {
+      flex: 1;
+      height: 72rpx;
+      background-color: #f5f7fa;
+      border-radius: 36rpx;
+      padding: 0 20rpx;
+      font-size: 28rpx;
+      border: 1rpx solid #eaeaea;
+    }
+    
+    .add-btn {
+      width: 200rpx;
+      height: 72rpx;
+      background-color: #1976d2;
+      color: #ffffff;
+      font-size: 28rpx;
+      border-radius: 36rpx;
+      margin-left: 20rpx;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
   
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
+  .filter-bar {
+    padding: 0 20rpx 20rpx;
+    display: flex;
+    
+    .filter-item {
+      padding: 10rpx 24rpx;
+      background-color: #f5f7fa;
+      border-radius: 30rpx;
+      font-size: 26rpx;
+      color: #666;
+      margin-right: 20rpx;
     }
   }
-}
-.pagination-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 16rpx;
-  margin: 24rpx 0 8rpx 0;
-  .page-btn {
-    font-size: 22rpx;
-    min-width: 80rpx;
-    height: 44rpx;
-    line-height: 44rpx;
-    border-radius: 22rpx;
-    background: #e3f2fd;
-    color: #1976d2;
-    border: none;
+  
+  .product-list {
+    padding: 0 20rpx;
+    
+    .product-card {
+      background-color: #fff;
+      border-radius: 12rpx;
+      margin-bottom: 20rpx;
+      padding: 20rpx;
+      display: flex;
+      box-shadow: 0 2rpx 10rpx rgba(0, 0, 0, 0.05);
+      
+      .card-left {
+        width: 160rpx;
+        height: 160rpx;
+        margin-right: 20rpx;
+        
+        .product-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 8rpx;
+        }
+      }
+      
+      .card-right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        
+        .card-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 16rpx;
+          
+          .product-title {
+            font-size: 32rpx;
+            color: #333;
+            font-weight: 500;
+          }
+          
+          .status-tag {
+            font-size: 24rpx;
+            padding: 4rpx 16rpx;
+            border-radius: 20rpx;
+            
+            &.on {
+              background-color: #e8f5e9;
+              color: #43a047;
+            }
+            
+            &.off {
+              background-color: #ffebee;
+              color: #e53935;
+            }
+          }
+        }
+        
+        .product-info {
+          flex: 1;
+          
+          text {
+            font-size: 26rpx;
+            color: #666;
+            display: block;
+            margin-bottom: 8rpx;
+          }
+          
+          .product-price {
+            color: #f44336;
+            font-weight: 500;
+          }
+        }
+        
+        .card-actions {
+          margin-top: 20rpx;
+          display: flex;
+          align-items: center;
+          position: relative;
+          
+          .mini-btn {
+            padding: 8rpx 20rpx;
+            font-size: 24rpx;
+            margin-right: 20rpx;
+            border-radius: 30rpx;
+            background-color: #f5f7fa;
+            color: #333;
+            
+            &.danger {
+              color: #f44336;
+            }
+          }
+          
+          .quote-badge {
+            position: absolute;
+            right: 0;
+            top: 0;
+            min-width: 40rpx;
+            height: 40rpx;
+            border-radius: 20rpx;
+            background-color: #f44336;
+            color: #fff;
+            font-size: 24rpx;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10rpx;
+          }
+        }
+      }
+    }
+  }
+  
+  .pagination-bar {
+    padding: 20rpx;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .page-btn {
+      width: 150rpx;
+      height: 70rpx;
+      border-radius: 35rpx;
+      font-size: 28rpx;
+      background-color: #1976d2;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+      &:disabled {
+        background-color: #ccc;
+      }
+    }
+    
+    .page-info {
+      margin: 0 30rpx;
+      font-size: 28rpx;
+      color: #333;
+    }
+  }
+  
+  .empty-state {
+    padding: 100rpx 0;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 18rpx;
-    box-sizing: border-box;
-    &:disabled {
-      background: #eee;
-      color: #aaa;
+    
+    .empty-image {
+      width: 200rpx;
+      height: 200rpx;
+      margin-bottom: 30rpx;
     }
-  }
-  .page-info {
-    font-size: 22rpx;
-    color: #666;
-  }
-}
-.filter-bar {
-  display: flex;
-  gap: 18rpx;
-  margin-bottom: 18rpx;
-  padding: 0 16rpx;
-  .filter-item {
-    font-size: 24rpx;
-    color: #1976d2;
-    background: #f5f5f5;
-    border-radius: 8rpx;
-    padding: 10rpx 24rpx;
-    min-width: 120rpx;
-    text-align: center;
+    
+    .empty-text {
+      font-size: 28rpx;
+      color: #999;
+    }
   }
 }
 </style> 

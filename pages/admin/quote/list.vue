@@ -1,75 +1,89 @@
 <template>
   <view class="admin-quote-list-container">
-    <view class="header-bar">
-      <input class="search-input" v-model="search" placeholder="搜索报价编号/用户/产品" @input="handleSearch" />
-      <picker :range="statusOptions" :value="statusIndex" @change="onStatusChange">
-        <view class="filter-item">{{ statusOptions[statusIndex] }}</view>
-      </picker>
+    <loading-animation :loading="isLoading" text="加载报价列表..." />
+    
+    <!-- 错误提示条 -->
+    <view class="error-bar" v-if="hasError && !isLoading">
+      <text class="error-message">{{ errorMessage }}</text>
+      <view class="error-action" @click="loadQuotes">重试</view>
     </view>
     
-    <view class="quote-list">
-      <view v-for="(item, index) in filteredQuotes" :key="index" class="quote-card" :class="item.status">
-        <view class="quote-header">
-          <view class="header-left">
-            <text class="quote-id">报价编号: {{ item.quote_id }}</text>
-            <text class="status-tag" :class="item.status">{{ getStatusText(item.status) }}</text>
+    <view v-if="!isLoading">
+      <view class="header-bar">
+        <input class="search-input" v-model="search" placeholder="搜索报价编号/用户/产品" @input="handleSearch" />
+        <picker :range="statusOptions" :value="statusIndex" @change="onStatusChange">
+          <view class="filter-item">{{ statusOptions[statusIndex] }}</view>
+        </picker>
+      </view>
+      
+      <view class="quote-list">
+        <view v-for="(item, index) in filteredQuotes" :key="index" class="quote-card" :class="item.status">
+          <view class="quote-header">
+            <view class="header-left">
+              <text class="quote-id">报价编号: {{ item.quote_id }}</text>
+              <text class="status-tag" :class="item.status">{{ getStatusText(item.status) }}</text>
+            </view>
+            <text class="quote-date">{{ formatDate(item.created_at) }}</text>
           </view>
-          <text class="quote-date">{{ formatDate(item.created_at) }}</text>
+          
+          <view class="quote-content">
+            <view class="info-row">
+              <text class="info-label">货代公司:</text>
+              <text class="info-value">{{ item.forwarder_name }}</text>
+            </view>
+            <view class="info-row">
+              <text class="info-label">出运线路:</text>
+              <text class="info-value">{{ item.shipping_route }}</text>
+            </view>
+            <view class="info-row price-row">
+              <view class="info-item">
+                <text class="info-label">单价:</text>
+                <text class="info-value">¥{{ item.price_per_kg }}/kg</text>
+              </view>
+              <view class="info-item">
+                <text class="info-label">总费用:</text>
+                <text class="info-value price">¥{{ item.total_cost }}</text>
+              </view>
+            </view>
+          </view>
+          
+          <view class="quote-footer">
+            <view class="user-info">
+              <text class="user-name">{{ item.user_name }}</text>
+              <text class="product-name">{{ item.product_name }}</text>
+            </view>
+            <view class="quote-actions">
+              <button v-if="item.status === 'pending'" class="mini-btn approve" @click="handleApprove(item)">通过</button>
+              <button v-if="item.status === 'pending'" class="mini-btn reject" @click="handleReject(item)">拒绝</button>
+              <button class="mini-btn view" @click="viewDetail(item)">查看</button>
+            </view>
+          </view>
         </view>
         
-        <view class="quote-content">
-          <view class="info-row">
-            <text class="info-label">货代公司:</text>
-            <text class="info-value">{{ item.forwarder_name }}</text>
-          </view>
-          <view class="info-row">
-            <text class="info-label">出运线路:</text>
-            <text class="info-value">{{ item.shipping_route }}</text>
-          </view>
-          <view class="info-row price-row">
-            <view class="info-item">
-              <text class="info-label">单价:</text>
-              <text class="info-value">¥{{ item.price_per_kg }}/kg</text>
-            </view>
-            <view class="info-item">
-              <text class="info-label">总费用:</text>
-              <text class="info-value price">¥{{ item.total_cost }}</text>
-            </view>
-          </view>
-        </view>
-        
-        <view class="quote-footer">
-          <view class="user-info">
-            <text class="user-name">{{ item.user_name }}</text>
-            <text class="product-name">{{ item.product_name }}</text>
-          </view>
-          <view class="quote-actions">
-            <button v-if="item.status === 'pending'" class="mini-btn approve" @click="handleApprove(item)">通过</button>
-            <button v-if="item.status === 'pending'" class="mini-btn reject" @click="handleReject(item)">拒绝</button>
-            <button class="mini-btn view" @click="viewDetail(item)">查看</button>
-          </view>
+        <view class="empty-state" v-if="filteredQuotes.length === 0">
+          <text class="empty-text">暂无相关报价</text>
         </view>
       </view>
       
-      <view class="empty-state" v-if="filteredQuotes.length === 0">
-        <text class="empty-text">暂无相关报价</text>
+      <!-- 分页控制 -->
+      <view class="pagination-bar">
+        <button class="page-btn" :disabled="page === 1" @click="page--">上一页</button>
+        <text class="page-info">第{{ page }}页</text>
+        <button class="page-btn" :disabled="!hasNextPage" @click="page++">下一页</button>
       </view>
-    </view>
-    
-    <!-- 分页控制 -->
-    <view class="pagination-bar">
-      <button class="page-btn" :disabled="page === 1" @click="page--">上一页</button>
-      <text class="page-info">第{{ page }}页</text>
-      <button class="page-btn" :disabled="!hasNextPage" @click="page++">下一页</button>
     </view>
   </view>
 </template>
 
 <script>
 import dayjs from 'dayjs'
+import LoadingAnimation from '../../../components/LoadingAnimation.vue'
 
 export default {
   name: 'AdminQuoteList',
+  components: {
+    LoadingAnimation
+  },
   data() {
     return {
       search: '',
@@ -77,7 +91,11 @@ export default {
       pageSize: 10,
       statusOptions: ['全部状态', '待审核', '已通过', '已拒绝', '已过期', '已取消'],
       statusIndex: 0,
-      quotes: []
+      quotes: [],
+      isLoading: true,
+      hasError: false,
+      errorMessage: '',
+      shouldFail: false // 用于开发时模拟请求失败的开关
     }
   },
   computed: {
@@ -139,100 +157,129 @@ export default {
     }
   },
   created() {
+    // 开发环境下随机决定是否模拟失败 (10%的概率失败)
+    if (process.env.NODE_ENV === 'development') {
+      this.shouldFail = Math.random() < 0.1
+    }
+    
     this.loadQuotes()
   },
   methods: {
     loadQuotes() {
-      // 生成模拟报价数据
-      const mockUsers = [
-        { id: 'U1001', name: '张三' },
-        { id: 'U1002', name: '李四' },
-        { id: 'U1003', name: '王五' }
-      ]
+      this.isLoading = true
+      this.hasError = false
       
-      const mockProducts = [
-        { id: 'P1001', name: '智能手表 Pro Max' },
-        { id: 'P1002', name: '蓝牙耳机' },
-        { id: 'P1003', name: '智能音箱' }
-      ]
-      
-      const mockForwarders = [
-        '环球快递',
-        '海运物流',
-        '航空货运',
-        '京东物流',
-        '顺丰速运'
-      ]
-      
-      const mockRoutes = [
-        '上海 - 洛杉矶',
-        '深圳 - 纽约',
-        '广州 - 伦敦',
-        '杭州 - 温哥华',
-        '南京 - 悉尼'
-      ]
-      
-      const mockQuotes = []
-      
-      // 生成20条随机报价数据
-      for (let i = 0; i < 20; i++) {
-        const user = mockUsers[Math.floor(Math.random() * mockUsers.length)]
-        const product = mockProducts[Math.floor(Math.random() * mockProducts.length)]
-        const price = Math.floor(40 + Math.random() * 20) // 40-60元/kg
-        const weight = Math.floor(100 + Math.random() * 400) // 100-500kg
-        const freight = price * weight
-        const customsFee = Math.floor(300 + Math.random() * 500) // 300-800元
-        const totalCost = freight + customsFee
-        
-        // 设置状态，确保有不同状态的数据
-        let status
-        if (i < 6) {
-          status = 'pending' // 30%待审核
-        } else if (i < 12) {
-          status = 'approved' // 30%已通过
-        } else if (i < 16) {
-          status = 'rejected' // 20%已拒绝
-        } else if (i < 18) {
-          status = 'expired' // 10%已过期
-        } else {
-          status = 'cancelled' // 10%已取消
-        }
-        
-        // 创建时间在过去30天内随机
-        const createdDaysAgo = Math.floor(Math.random() * 30)
-        const createdAt = new Date(Date.now() - createdDaysAgo * 24 * 60 * 60 * 1000)
-        
-        // 计算更新时间（如果已审核）
-        let updatedAt = null
-        if (status === 'approved' || status === 'rejected') {
-          const updateDelay = Math.floor(Math.random() * 3) + 1 // 1-3天后审核
-          updatedAt = new Date(createdAt.getTime() + updateDelay * 24 * 60 * 60 * 1000)
-        }
-        
-        mockQuotes.push({
-          quote_id: `Q${10001 + i}`,
-          user_id: user.id,
-          user_name: user.name,
-          product_id: product.id,
-          product_name: product.name,
-          status: status,
-          forwarder_name: mockForwarders[Math.floor(Math.random() * mockForwarders.length)],
-          shipping_route: mockRoutes[Math.floor(Math.random() * mockRoutes.length)],
-          delivery_time: `${Math.floor(5 + Math.random() * 10)}-${Math.floor(15 + Math.random() * 10)}天`,
-          price_per_kg: price,
-          total_gross_weight: weight,
-          total_freight: freight,
-          customs_fee: customsFee,
-          total_cost: totalCost,
-          remark: i % 3 === 0 ? '这是报价的备注信息。' : '',
-          created_at: createdAt,
-          updated_at: updatedAt,
-          reviewer: updatedAt ? '管理员' : null
-        })
+      try {
+        // 模拟API请求，减少加载时间以便调试
+        setTimeout(() => {
+          // 如果shouldFail为true，则模拟请求失败
+          if (this.shouldFail) {
+            this.handleError(new Error('模拟请求失败，这是一个随机测试错误'))
+            return
+          }
+          
+          // 生成模拟报价数据
+          const mockUsers = [
+            { id: 'U1001', name: '张三' },
+            { id: 'U1002', name: '李四' },
+            { id: 'U1003', name: '王五' }
+          ]
+          
+          const mockProducts = [
+            { id: 'P1001', name: '智能手表 Pro Max' },
+            { id: 'P1002', name: '蓝牙耳机' },
+            { id: 'P1003', name: '智能音箱' }
+          ]
+          
+          const mockForwarders = [
+            '环球快递',
+            '海运物流',
+            '航空货运',
+            '京东物流',
+            '顺丰速运'
+          ]
+          
+          const mockRoutes = [
+            '上海 - 洛杉矶',
+            '深圳 - 纽约',
+            '广州 - 伦敦',
+            '杭州 - 温哥华',
+            '南京 - 悉尼'
+          ]
+          
+          const mockQuotes = []
+          
+          // 生成20条随机报价数据
+          for (let i = 0; i < 20; i++) {
+            const user = mockUsers[Math.floor(Math.random() * mockUsers.length)]
+            const product = mockProducts[Math.floor(Math.random() * mockProducts.length)]
+            const price = Math.floor(40 + Math.random() * 20) // 40-60元/kg
+            const weight = Math.floor(100 + Math.random() * 400) // 100-500kg
+            const freight = price * weight
+            const customsFee = Math.floor(300 + Math.random() * 500) // 300-800元
+            const totalCost = freight + customsFee
+            
+            // 设置状态，确保有不同状态的数据
+            let status
+            if (i < 6) {
+              status = 'pending' // 30%待审核
+            } else if (i < 12) {
+              status = 'approved' // 30%已通过
+            } else if (i < 16) {
+              status = 'rejected' // 20%已拒绝
+            } else if (i < 18) {
+              status = 'expired' // 10%已过期
+            } else {
+              status = 'cancelled' // 10%已取消
+            }
+            
+            // 创建时间在过去30天内随机
+            const createdDaysAgo = Math.floor(Math.random() * 30)
+            const createdAt = new Date(Date.now() - createdDaysAgo * 24 * 60 * 60 * 1000)
+            
+            // 计算更新时间（如果已审核）
+            let updatedAt = null
+            if (status === 'approved' || status === 'rejected') {
+              const updateDelay = Math.floor(Math.random() * 3) + 1 // 1-3天后审核
+              updatedAt = new Date(createdAt.getTime() + updateDelay * 24 * 60 * 60 * 1000)
+            }
+            
+            mockQuotes.push({
+              quote_id: `Q${10001 + i}`,
+              user_id: user.id,
+              user_name: user.name,
+              product_id: product.id,
+              product_name: product.name,
+              status: status,
+              forwarder_name: mockForwarders[Math.floor(Math.random() * mockForwarders.length)],
+              shipping_route: mockRoutes[Math.floor(Math.random() * mockRoutes.length)],
+              delivery_time: `${Math.floor(5 + Math.random() * 10)}-${Math.floor(15 + Math.random() * 10)}天`,
+              price_per_kg: price,
+              total_gross_weight: weight,
+              total_freight: freight,
+              customs_fee: customsFee,
+              total_cost: totalCost,
+              remark: i % 3 === 0 ? '这是报价的备注信息。' : '',
+              created_at: createdAt,
+              updated_at: updatedAt,
+              reviewer: updatedAt ? '管理员' : null
+            })
+          }
+          
+          // 按创建时间降序排序
+          this.quotes = mockQuotes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+          this.isLoading = false
+        }, 300) // 减少加载时间以提高响应速度
+      } catch (error) {
+        this.handleError(error)
       }
-      
-      // 按创建时间降序排序
-      this.quotes = mockQuotes.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+    },
+    
+    handleError(error) {
+      console.error('获取报价列表失败:', error)
+      this.hasError = true
+      this.errorMessage = error.message || '获取报价列表失败，请重试'
+      this.isLoading = false
     },
     
     formatDate(date) {
@@ -261,7 +308,7 @@ export default {
     
     viewDetail(item) {
       uni.navigateTo({
-        url: `/pages/admin/quote/detail?quoteId=${item.quote_id}&productId=${item.product_id}&status=${item.status}`
+        url: `/pages/admin/quote/detail?quoteId=${item.quote_id}&productId=${item.product_id}`
       })
     },
     

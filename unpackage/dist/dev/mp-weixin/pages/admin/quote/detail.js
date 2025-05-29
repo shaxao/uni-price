@@ -64,12 +64,17 @@ const _sfc_main = {
           title: "已取消",
           desc: "用户已取消了该报价，不需要进一步操作。"
         }
-      }
+      },
+      shouldFail: false
+      // 用于开发时模拟请求失败的开关
     };
   },
   onLoad(options) {
     this.quoteId = options.quoteId || "";
     this.productId = options.productId || "";
+    {
+      this.shouldFail = Math.random() < 0.1;
+    }
     this.fetchQuoteDetail();
   },
   methods: {
@@ -78,6 +83,10 @@ const _sfc_main = {
       this.hasError = false;
       try {
         setTimeout(() => {
+          if (this.shouldFail) {
+            this.handleError(new Error("模拟请求失败，这是一个随机测试错误"));
+            return;
+          }
           const mockData = {
             quote_id: this.quoteId || "Q10001",
             user_id: "U1002",
@@ -101,13 +110,16 @@ const _sfc_main = {
           };
           this.quote = mockData;
           this.isLoading = false;
-        }, 800);
+        }, 300);
       } catch (error) {
-        common_vendor.index.__f__("error", "at pages/admin/quote/detail.vue:263", "获取报价详情失败:", error);
-        this.hasError = true;
-        this.errorMessage = "获取报价详情失败，请重试";
-        this.isLoading = false;
+        this.handleError(error);
       }
+    },
+    handleError(error) {
+      common_vendor.index.__f__("error", "at pages/admin/quote/detail.vue:281", "获取报价详情失败:", error);
+      this.hasError = true;
+      this.errorMessage = error.message || "获取报价详情失败，请重试";
+      this.isLoading = false;
     },
     formatDate(date) {
       if (!date)

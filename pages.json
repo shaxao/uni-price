@@ -1,6 +1,12 @@
 {
   "pages": [
     {
+      "path": "pages/admin/index/index",
+      "style": {
+        "navigationBarTitleText": "管理后台"
+      }
+    },
+    {
       "path": "pages/admin/product/list",
       "style": {
         "navigationBarTitleText": "产品管理"

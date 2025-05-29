@@ -1,5 +1,5 @@
 {
-  "navigationBarTitleText": "产品管理",
+  "navigationBarTitleText": "管理后台",
   "usingComponents": {
     "top-bar": "../../../components/TopBar",
     "admin-nav-bar": "../../../components/AdminNavBar",

@@ -1,11 +1,16 @@
 "use strict";
 const common_vendor = require("../../../common/vendor.js");
+const common_assets = require("../../../common/assets.js");
 const BaseCard = () => "../../../components/BaseCard.js";
+const TopBar = () => "../../../components/TopBar.js";
+const AdminNavBar = () => "../../../components/AdminNavBar.js";
+const LoadingAnimation = () => "../../../components/LoadingAnimation.js";
 const _sfc_main = {
   name: "AdminProductList",
-  components: { BaseCard },
+  components: { BaseCard, TopBar, AdminNavBar, LoadingAnimation },
   data() {
     return {
+      loading: false,
       search: "",
       page: 1,
       pageSize: 10,
@@ -58,77 +63,86 @@ const _sfc_main = {
       return list.length > this.page * this.pageSize;
     }
   },
-  created() {
+  onLoad() {
     this.loadProducts();
   },
   methods: {
     loadProducts() {
-      const mockProducts = [
-        {
-          product_id: "P1001",
-          product_name: "智能手表",
-          description: "多功能健康监测智能手表",
-          product_image: "https://cdn.example.com/img/watch.jpg",
-          quantity: 120,
-          warehouse: "上海仓",
-          status: "on",
-          pendingQuotes: 3,
-          // 待审核报价数量
-          totalQuotes: 5,
-          // 总报价数量
-          hasNewQuotes: true
-          // 是否有新报价
-        },
-        {
-          product_id: "P1002",
-          product_name: "蓝牙耳机",
-          description: "降噪无线蓝牙耳机",
-          product_image: "https://cdn.example.com/img/earphone.jpg",
-          quantity: 80,
-          warehouse: "深圳仓",
-          status: "off",
-          pendingQuotes: 0,
-          totalQuotes: 2,
-          hasNewQuotes: false
-        },
-        {
-          product_id: "P1003",
-          product_name: "智能音箱",
-          description: "高音质智能语音音箱",
-          product_image: "https://cdn.example.com/img/speaker.jpg",
-          quantity: 50,
-          warehouse: "上海仓",
-          status: "on",
-          pendingQuotes: 2,
-          totalQuotes: 3,
-          hasNewQuotes: true
-        },
-        {
-          product_id: "P1004",
-          product_name: "无线充电器",
-          description: "快充无线充电板",
-          product_image: "https://cdn.example.com/img/charger.jpg",
-          quantity: 200,
-          warehouse: "深圳仓",
-          status: "on",
-          pendingQuotes: 1,
-          totalQuotes: 1,
-          hasNewQuotes: true
-        },
-        {
-          product_id: "P1005",
-          product_name: "智能手环",
-          description: "运动监测智能手环",
-          product_image: "https://cdn.example.com/img/band.jpg",
-          quantity: 150,
-          warehouse: "上海仓",
-          status: "on",
-          pendingQuotes: 0,
-          totalQuotes: 0,
-          hasNewQuotes: false
-        }
-      ];
-      this.products = mockProducts;
+      this.loading = true;
+      setTimeout(() => {
+        const mockProducts = [
+          {
+            product_id: "P1001",
+            product_name: "智能手表",
+            description: "多功能健康监测智能手表",
+            product_image: "https://cdn.example.com/img/watch.jpg",
+            quantity: 120,
+            warehouse: "上海仓",
+            status: "on",
+            price: 1280,
+            pendingQuotes: 3,
+            // 待审核报价数量
+            totalQuotes: 5,
+            // 总报价数量
+            hasNewQuotes: true
+            // 是否有新报价
+          },
+          {
+            product_id: "P1002",
+            product_name: "蓝牙耳机",
+            description: "降噪无线蓝牙耳机",
+            product_image: "https://cdn.example.com/img/earphone.jpg",
+            quantity: 80,
+            warehouse: "深圳仓",
+            status: "off",
+            price: 299,
+            pendingQuotes: 0,
+            totalQuotes: 2,
+            hasNewQuotes: false
+          },
+          {
+            product_id: "P1003",
+            product_name: "智能音箱",
+            description: "高音质智能语音音箱",
+            product_image: "https://cdn.example.com/img/speaker.jpg",
+            quantity: 50,
+            warehouse: "上海仓",
+            status: "on",
+            price: 799,
+            pendingQuotes: 2,
+            totalQuotes: 3,
+            hasNewQuotes: true
+          },
+          {
+            product_id: "P1004",
+            product_name: "无线充电器",
+            description: "快充无线充电板",
+            product_image: "https://cdn.example.com/img/charger.jpg",
+            quantity: 200,
+            warehouse: "深圳仓",
+            status: "on",
+            price: 159,
+            pendingQuotes: 1,
+            totalQuotes: 1,
+            hasNewQuotes: true
+          },
+          {
+            product_id: "P1005",
+            product_name: "智能手环",
+            description: "运动监测智能手环",
+            product_image: "https://cdn.example.com/img/band.jpg",
+            quantity: 150,
+            warehouse: "上海仓",
+            status: "on",
+            price: 199,
+            pendingQuotes: 0,
+            totalQuotes: 0,
+            hasNewQuotes: false
+          }
+        ];
+        this.products = mockProducts;
+        this.loading = false;
+      }, 800);
     },
     handleSearch() {
       this.page = 1;
@@ -172,32 +186,43 @@ const _sfc_main = {
     },
     onViewQuotes(item) {
       common_vendor.index.navigateTo({
-        url: `/pages/admin/product/detail?id=${item.product_id}&scrollToQuotes=true`,
-        success: () => {
-          item.hasNewQuotes = false;
-        }
+        url: `/pages/admin/product/detail?id=${item.product_id}&scrollToQuotes=true`
       });
     }
   }
 };
+if (!Array) {
+  const _component_TopBar = common_vendor.resolveComponent("TopBar");
+  const _component_AdminNavBar = common_vendor.resolveComponent("AdminNavBar");
+  const _component_LoadingAnimation = common_vendor.resolveComponent("LoadingAnimation");
+  (_component_TopBar + _component_AdminNavBar + _component_LoadingAnimation)();
+}
 function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-  return {
-    a: common_vendor.o([($event) => $data.search = $event.detail.value, (...args) => $options.handleSearch && $options.handleSearch(...args)]),
-    b: $data.search,
-    c: common_vendor.o((...args) => $options.handleAdd && $options.handleAdd(...args)),
-    d: common_vendor.t($data.priceOptions[$data.priceIndex]),
-    e: $data.priceOptions,
-    f: $data.priceIndex,
-    g: common_vendor.o((...args) => $options.onPriceChange && $options.onPriceChange(...args)),
-    h: common_vendor.t($data.statusOptions[$data.statusIndex]),
-    i: $data.statusOptions,
-    j: $data.statusIndex,
-    k: common_vendor.o((...args) => $options.onStatusChange && $options.onStatusChange(...args)),
-    l: common_vendor.t($data.warehouseOptions[$data.warehouseIndex]),
-    m: $data.warehouseOptions,
-    n: $data.warehouseIndex,
-    o: common_vendor.o((...args) => $options.onWarehouseChange && $options.onWarehouseChange(...args)),
-    p: common_vendor.f($data.products, (item, k0, i0) => {
+  return common_vendor.e({
+    a: common_vendor.p({
+      title: "产品管理",
+      showBack: false,
+      withBorder: true
+    }),
+    b: common_vendor.p({
+      currentPath: "/pages/admin/product/list"
+    }),
+    c: common_vendor.o([($event) => $data.search = $event.detail.value, (...args) => $options.handleSearch && $options.handleSearch(...args)]),
+    d: $data.search,
+    e: common_vendor.o((...args) => $options.handleAdd && $options.handleAdd(...args)),
+    f: common_vendor.t($data.priceOptions[$data.priceIndex]),
+    g: $data.priceOptions,
+    h: $data.priceIndex,
+    i: common_vendor.o((...args) => $options.onPriceChange && $options.onPriceChange(...args)),
+    j: common_vendor.t($data.statusOptions[$data.statusIndex]),
+    k: $data.statusOptions,
+    l: $data.statusIndex,
+    m: common_vendor.o((...args) => $options.onStatusChange && $options.onStatusChange(...args)),
+    n: common_vendor.t($data.warehouseOptions[$data.warehouseIndex]),
+    o: $data.warehouseOptions,
+    p: $data.warehouseIndex,
+    q: common_vendor.o((...args) => $options.onWarehouseChange && $options.onWarehouseChange(...args)),
+    r: common_vendor.f($options.filteredProducts, (item, k0, i0) => {
       return common_vendor.e({
         a: $data.defaultImg || item.product_image,
         b: common_vendor.t(item.product_name),
@@ -207,29 +232,39 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         f: common_vendor.t(item.description),
         g: common_vendor.t(item.quantity),
         h: common_vendor.t(item.warehouse),
-        i: common_vendor.o(($event) => $options.onView(item), item.product_id),
-        j: common_vendor.o(($event) => $options.onEdit(item), item.product_id),
-        k: common_vendor.o(($event) => $options.onDelete(item), item.product_id),
-        l: item.status === "on"
-      }, item.status === "on" ? {
-        m: common_vendor.o(($event) => $options.onChangeStatus(item, "off"), item.product_id)
-      } : {
-        n: common_vendor.o(($event) => $options.onChangeStatus(item, "on"), item.product_id)
-      }, {
-        o: item.pendingQuotes > 0
-      }, item.pendingQuotes > 0 ? {
-        p: common_vendor.t(item.pendingQuotes),
-        q: common_vendor.o(($event) => $options.onViewQuotes(item), item.product_id)
+        i: item.price
+      }, item.price ? {
+        j: common_vendor.t(item.price.toFixed(2))
       } : {}, {
-        r: item.product_id
+        k: common_vendor.o(($event) => $options.onView(item), item.product_id),
+        l: common_vendor.o(($event) => $options.onEdit(item), item.product_id),
+        m: common_vendor.o(($event) => $options.onDelete(item), item.product_id),
+        n: item.status === "on"
+      }, item.status === "on" ? {
+        o: common_vendor.o(($event) => $options.onChangeStatus(item, "off"), item.product_id)
+      } : {
+        p: common_vendor.o(($event) => $options.onChangeStatus(item, "on"), item.product_id)
+      }, {
+        q: item.pendingQuotes > 0
+      }, item.pendingQuotes > 0 ? {
+        r: common_vendor.t(item.pendingQuotes),
+        s: common_vendor.o(($event) => $options.onViewQuotes(item), item.product_id)
+      } : {}, {
+        t: item.product_id
       });
     }),
-    q: $data.page === 1,
-    r: common_vendor.o(($event) => $data.page--),
-    s: common_vendor.t($data.page),
-    t: !$options.hasNextPage,
-    v: common_vendor.o(($event) => $data.page++)
-  };
+    s: $data.page === 1,
+    t: common_vendor.o(($event) => $data.page--),
+    v: common_vendor.t($data.page),
+    w: !$options.hasNextPage,
+    x: common_vendor.o(($event) => $data.page++),
+    y: $data.loading
+  }, $data.loading ? {} : {}, {
+    z: $options.filteredProducts.length === 0
+  }, $options.filteredProducts.length === 0 ? {
+    A: common_assets._imports_0$1,
+    B: common_vendor.t($data.search ? "未找到匹配的产品" : "暂无产品数据")
+  } : {});
 }
 const MiniProgramPage = /* @__PURE__ */ common_vendor._export_sfc(_sfc_main, [["render", _sfc_render], ["__scopeId", "data-v-a64add69"]]);
 wx.createPage(MiniProgramPage);

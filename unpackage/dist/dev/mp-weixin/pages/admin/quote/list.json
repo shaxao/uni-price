@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "报价管理",
-  "usingComponents": {}
+  "usingComponents": {
+    "loading-animation": "../../../components/LoadingAnimation"
+  }
 }

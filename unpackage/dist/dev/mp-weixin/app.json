@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/admin/index/index",
     "pages/admin/product/list",
     "pages/admin/product/edit",
     "pages/admin/product/detail",

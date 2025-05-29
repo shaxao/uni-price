@@ -82,7 +82,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   } : {}, {
     c: _ctx.cartItems.length === 0
   }, _ctx.cartItems.length === 0 ? {
-    d: common_assets._imports_0$1,
+    d: common_assets._imports_0$3,
     e: common_vendor.o((...args) => $options.navigateToHome && $options.navigateToHome(...args))
   } : {
     f: common_vendor.f(_ctx.cartItems, (item, index, i0) => {
@@ -95,7 +95,7 @@ function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
         f: index * 0.05 + "s"
       };
     }),
-    g: common_assets._imports_1$1
+    g: common_assets._imports_1$2
   }, {
     h: _ctx.cartItems.length > 0
   }, _ctx.cartItems.length > 0 ? {
